@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 
 const router = express.Router();
 
@@ -13,6 +14,18 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     const date = new Date();
     const message = {...req.body, "datetime": date};
+
+    const fileName = `./messages/${date}.txt`;
+
+    const data = JSON.stringify(message, null, 2);
+
+    fs.writeFile(fileName, data, (err) => {
+        if (err) {
+            console.error(err);
+        }
+        console.log('File was saved!');
+    });
+
     console.log(message);
     res.send('Will create new message here')
 });
