@@ -8,10 +8,15 @@ const path = './messages';
 router.get('/', (req, res) => {
     fs.readdir('./messages', (err, files) => {
         console.log(files);
-        files.forEach(file => {
+        const lastMessages = files.reverse().slice(0, 5);
+        if (lastMessages.length === 0) {
+            res.send('The list of messages will be here')
+        }
+
+        lastMessages.forEach(file => {
             console.log(path + '/' + file);
         });
-        res.send(files);
+        res.send(lastMessages);
     })
 });
 
