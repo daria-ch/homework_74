@@ -11,7 +11,9 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log(req.body);
+    const date = new Date();
+    const message = {...req.body, "datetime": date};
+    console.log(message);
     res.send('Will create new message here')
 });
 
