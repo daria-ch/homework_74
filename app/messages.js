@@ -3,21 +3,28 @@ const fs = require('fs');
 
 const router = express.Router();
 const path = './messages';
-
+let messagesText = [];
 
 router.get('/', (req, res) => {
-    fs.readdir('./messages', (err, files) => {
+    fs.readdir(path, (err, files) => {
         console.log(files);
-        const lastMessages = files.reverse().slice(0, 5);
+        let lastMessages = files.reverse().slice(0, 5);
         if (lastMessages.length === 0) {
             res.send('The list of messages will be here')
         }
-
         lastMessages.forEach(file => {
             console.log(path + '/' + file);
+            fs.readFile(path + '/' + file, (err, data) => {
+                if (err) {
+                    console.error(err);
+                } else {
+                    messagesText.push(JSON.parse(data.toString()));
+                }
+            });
         });
-        res.send(lastMessages);
-    })
+        res.send(messagesText);
+        messagesText = [];
+    });
 });
 
 router.post('/', (req, res) => {

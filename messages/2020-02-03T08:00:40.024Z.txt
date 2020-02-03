@@ -1,4 +1,0 @@
-{
-  "message": "Hello, World!",
-  "datetime": "2020-02-03T08:00:40.024Z"
-}

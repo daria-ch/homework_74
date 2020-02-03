@@ -1,4 +1,0 @@
-{
-  "message": "My name is Jack Daniels",
-  "datetime": "2020-02-03T07:44:53.962Z"
-}
